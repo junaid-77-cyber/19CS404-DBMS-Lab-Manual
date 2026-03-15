@@ -105,124 +105,240 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+Write a SQL query to Add a new column Mobilenumber as number in the Student_details table.
 
-```sql
--- Paste your SQL code below for Question 1
+```
+Sample table: Student_details
+
+ cid              name             type             notnu  dflt_value  pk
+---------------  ---------------  ---------------  -----  ----------  ----------
+0                RollNo           int              0                  1
+1                Name             VARCHAR(100)     1                  0
+2                Gender           TEXT             1                  0
+3                Subject          VARCHAR(30)      0                  0
+4                MARKS            INT (3)          0                  0
+```
+
+```sql 
+ALTER TABLE Student_details
+ADD COLUMN Mobilenumber number;
 ```
 
 **Output:**
 
-![Output1](output.png)
+![alt text](q1.png)
 
 **Question 2**
 ---
--- Paste Question 2 here
+Create a table named Events with the following columns:
+EventID as INTEGER
+EventName as TEXT
+EventDate as DATE
 
 ```sql
--- Paste your SQL code below for Question 2
+CREATE TABLE Events(
+EventID INTEGER,
+EventName TEXT,
+EventDate DATE
+);
 ```
 
 **Output:**
 
-![Output2](output.png)
+![q1.png](q2.png)
 
 **Question 3**
 ---
--- Paste Question 3 here
+Create a new table named products with the following specifications:
+product_id as INTEGER and primary key.
+product_name as TEXT and not NULL.
+list_price as DECIMAL (10, 2) and not NULL.
+discount as DECIMAL (10, 2) with a default value of 0 and not NULL.
+A CHECK constraint at the table level to ensure:
+list_price is greater than or equal to discount
+discount is greater than or equal to 0
+list_price is greater than or equal to 0
 
 ```sql
--- Paste your SQL code below for Question 3
+CREATE TABLE products(
+product_id INTEGER PRIMARY KEY,
+product_name TEXT NOT NULL,
+list_price DECIMAL(10,2) NOT NULL,
+discount DECIMAL(10,2) NOT NULL DEFAULT 0,
+CHECK(
+    list_price >= discount
+    AND discount >= 0
+    AND list_price >= 0
+    )
+);
 ```
 
 **Output:**
 
-![Output3](output.png)
+![q3.png](q3.png)
 
 **Question 4**
 ---
--- Paste Question 4 here
+Create a table named Products with the following columns:
+ProductID as INTEGER
+ProductName as TEXT
+Price as REAL
+Stock as INTEGER
 
 ```sql
--- Paste your SQL code below for Question 4
+CREATE TABLE Products(
+ProductID INTEGER,
+ProductName TEXT,
+Price REAL,
+Stock INTEGER
+);
 ```
 
 **Output:**
 
-![Output4](output.png)
+![alt text](q4.png)
 
 **Question 5**
 ---
--- Paste Question 5 here
+Insert a student with RollNo 201, Name David Lee, Gender M, Subject Physics, and MARKS 92 into the Student_details table.
 
 ```sql
--- Paste your SQL code below for Question 5
+INSERT INTO Student_details (RollNo, Name, Gender, Subject, MARKS)
+VALUES (201, 'David Lee', 'M', 'Physics', 92);
 ```
 
 **Output:**
 
-![Output5](output.png)
+![alt text](q5.png)
 
 **Question 6**
 ---
--- Paste Question 6 here
+In the Cusomers table, insert a record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
+
+```
+CustomerID  Name          Address      City        ZipCode
+----------  ------------  ----------   ----------  ----------
+306         Diana Prince  Themyscira
+307         Bruce Wayne   Wayne Manor  Gotham      10007
+308         Peter Parker  Queens                   11375
+```
 
 ```sql
--- Paste your SQL code below for Question 6
+INSERT INTO Customers (CustomerID, Name, Address, City, ZipCode)
+VALUES (306, 'Diana Prince', 'Themyscira', NULL, NULL);
+
+INSERT INTO Customers (CustomerID, Name, Address, City, ZipCode)
+VALUES (307, 'Bruce Wayne', 'Wayne Manor', 'Gotham', 10007);
+
+INSERT INTO Customers (CustomerID, Name, Address, City, ZipCode)
+VALUES (308, 'Peter Parker', 'Queens', NULL, 11375);
 ```
 
 **Output:**
 
-![Output6](output.png)
+![alt text](q6.png)
 
 **Question 7**
 ---
--- Paste Question 7 here
+
+Write a SQL query to Add a new column State as text in the Student_details table.
+
+```
+Sample table: Student_details
+
+ cid              name             type   notnull     dflt_value  pk
+---------------  ---------------  -----  ----------  ----------  ----------
+0                RollNo           int    0                       1
+1                Name             VARCH  1                       0
+2                Gender           TEXT   1                       0
+3                Subject          VARCH  0                       0
+4                MARKS            INT (3)  0                       0
+```
 
 ```sql
--- Paste your SQL code below for Question 7
+ALTER TABLE Student_details
+ADD COLUMN State TEXT;
 ```
 
 **Output:**
 
-![Output7](output.png)
+![alt text](q7.png)
 
 **Question 8**
 ---
--- Paste Question 8 here
+Create a new table named item with the following specifications and constraints:
+item_id as TEXT and as primary key.
+item_desc as TEXT.
+rate as INTEGER.
+icom_id as TEXT with a length of 4.
+icom_id is a foreign key referencing com_id in the company table.
+The foreign key should set NULL on updates and deletes.
+item_desc and rate should not accept NULL.
 
 ```sql
--- Paste your SQL code below for Question 8
+CREATE TABLE item(
+item_id TEXT PRIMARY KEY,
+item_desc TEXT NOT NULL,
+rate INTEGER NOT NULL,
+icom_id TEXT CHECK (LENGTH(icom_id) = 4),
+FOREIGN KEY (icom_id)
+    REFERENCES company(com_id)
+    ON UPDATE SET NULL
+    ON DELETE SET NULL
+);
 ```
 
 **Output:**
 
-![Output8](output.png)
+![alt text](q8.png)
 
 **Question 9**
 ---
--- Paste Question 9 here
+Create a table named Products with the following constraints:
+ProductID as INTEGER should be the primary key.
+ProductName as TEXT should be unique and not NULL.
+Price as REAL should be greater than 0.
+StockQuantity as INTEGER should be non-negative.
 
 ```sql
--- Paste your SQL code below for Question 9
+CREATE TABLE Products (
+    ProductID INTEGER PRIMARY KEY,
+    ProductName TEXT NOT NULL UNIQUE,
+    Price REAL CHECK (Price > 0),
+    StockQuantity INTEGER CHECK (StockQuantity >= 0)
+);
 ```
 
 **Output:**
 
-![Output9](output.png)
+![alt text](q9.png)
 
 **Question 10**
 ---
--- Paste Question 10 here
+In the Student_details table, insert a student record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
+
+```
+RollNo      Name            Gender      Subject      MARKS
+----------  ------------    ----------  ----------   ----------
+205         Olivia Green    F
+207         Liam Smith      M           Mathematics  85
+208         Sophia Johnson  F           Science
+```
 
 ```sql
--- Paste your SQL code below for Question 10
+INSERT INTO Student_details (RollNo, Name, Gender, Subject, MARKS)
+VALUES (205, 'Olivia Green', 'F', NULL, NULL);
+
+INSERT INTO Student_details (RollNo, Name, Gender, Subject, MARKS)
+VALUES (207, 'Liam Smith', 'M', 'Mathematic', 85);
+
+INSERT INTO Student_details (RollNo, Name, Gender, Subject, MARKS)
+VALUES (208, 'Sophia Johns', 'F', 'Science', NULL);
 ```
 
 **Output:**
 
-![Output10](output.png)
-
+![alt text](q10.png)
 
 ## RESULT
 Thus, the SQL queries to implement different types of constraints and DDL commands have been executed successfully.
