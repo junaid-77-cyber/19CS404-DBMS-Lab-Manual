@@ -38,124 +38,198 @@ HAVING condition;
 
 **Question 1**
 --
--- Paste Question 1 here
+Write a SQL query to find the average length of email addresses (in characters):
+```
+Table: customer
+
+name        type
+----------  ----------
+id          INTEGER
+name        TEXT
+city        TEXT
+email       TEXT
+phone       INTEGER
+```
 
 ```sql
--- Paste your SQL code below for Question 1
+SELECT AVG(LENGTH(email)) AS avg_email_length
+FROM customer;
 ```
 
 **Output:**
 
-![Output1](output.png)
+![alt text](q1.png)
 
 **Question 2**
 ---
--- Paste Question 2 here
+Write a SQL query to find the youngest employee in the company?
+```
+Table: employee
+
+name        type
+----------  ----------
+id          INTEGER
+name        TEXT
+age         INTEGER
+city        TEXT
+income      INTEGER
+```
 
 ```sql
--- Paste your SQL code below for Question 2
+SELECT name AS Employee_Name, age AS Age
+FROM employee
+ORDER BY age ASC
+LIMIT 1;
 ```
 
 **Output:**
 
-![Output2](output.png)
+![alt text](q2.png)
 
 **Question 3**
 ---
--- Paste Question 3 here
+Write a SQL query to calculate total purchase amount of all orders. Return total purchase amount.
+```
+Sample table: orders
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+
+----------  ----------  ----------  -----------  -----------
+
+70001       150.5       2012-10-05  3005         5002
+
+70009       270.65      2012-09-10  3001         5005
+
+70002       65.26       2012-10-05  3002         5001
+```
 
 ```sql
--- Paste your SQL code below for Question 3
+SELECT SUM(purch_amt) AS TOTAL
+FROM orders;
 ```
 
 **Output:**
 
-![Output3](output.png)
+![q3.png](q3.png)
 
 **Question 4**
 ---
--- Paste Question 4 here
+How many patients have insurance coverage valid in each year?
+```
+Sample table:Insurance Table
+
+name               type
+-----------------  ----------
+InsuranceID        INTEGER
+PatientID          INTEGER
+InsuranceCompany   TEXT
+PolicyNumber       TEXT
+PolicyHolder       TEXT
+ValidityPeriod     TEXT
+```
 
 ```sql
--- Paste your SQL code below for Question 4
+SELECT SUBSTR(ValidityPeriod,1,4) AS ValidityYear,
+       COUNT(PatientID) AS TotalPatients
+FROM Insurance
+GROUP BY ValidityYear
+ORDER BY ValidityYear;
 ```
 
 **Output:**
 
-![Output4](output.png)
+![alt text](q4.png)
 
 **Question 5**
 ---
--- Paste Question 5 here
+How many prescriptions were written in each frequency category (e.g., once daily, twice daily)?
 
 ```sql
--- Paste your SQL code below for Question 5
+SELECT Frequency,
+       COUNT(*) AS TotalPrescriptions
+FROM Prescriptions
+GROUP BY Frequency
+ORDER BY Frequency;
 ```
 
 **Output:**
 
-![Output5](output.png)
+![alt text](q5.png)
 
 **Question 6**
 ---
--- Paste Question 6 here
+What is the count of male and female patients?
 
 ```sql
--- Paste your SQL code below for Question 6
+SELECT Gender,
+       COUNT(*) AS TotalPatients
+FROM Patients
+GROUP BY Gender;
 ```
 
 **Output:**
 
-![Output6](output.png)
+![alt text](q6.png)
 
 **Question 7**
 ---
--- Paste Question 7 here
+Write the SQL query that accomplishes the selection of number of products for each category from products table which includes only those products where the category ID is greater than 2.
 
 ```sql
--- Paste your SQL code below for Question 7
+SELECT category_id, COUNT(*) AS COUNT
+FROM products
+WHERE category_id > 2
+GROUP BY category_id;
 ```
 
 **Output:**
 
-![Output7](output.png)
+![alt text](q7.png)
 
 **Question 8**
 ---
--- Paste Question 8 here
+Write the SQL query that accomplishes the grouping of data by joining date (jdate), calculates the total work hours for each date, and excludes dates where the total work hour sum is not greater than 40.
 
 ```sql
--- Paste your SQL code below for Question 8
+SELECT jdate, SUM(workhour)
+FROM employee1
+GROUP BY jdate
+HAVING SUM(workhour) > 40;
 ```
 
 **Output:**
 
-![Output8](output.png)
+![alt text](q8.png)
 
 **Question 9**
 ---
--- Paste Question 9 here
+Write the SQL query that achieves the grouping of data by age, calculates the minimum income for each age group, and includes only those age groups where the minimum income is less than 1,000,000.
 
 ```sql
--- Paste your SQL code below for Question 9
+SELECT age, MIN(income) AS Income
+FROM employee
+GROUP BY age
+HAVING MIN(income) < 1000000;
 ```
 
 **Output:**
 
-![Output9](output.png)
+![alt text](q9.png)
 
 **Question 10**
 ---
--- Paste Question 10 here
+Write the SQL query that accomplishes the selection of product which has lowest price in each category from the "products" table and includes only those products where the minimum price is less than 10.
 
 ```sql
--- Paste your SQL code below for Question 10
+SELECT category_id, MIN(price) AS Price
+FROM products
+GROUP BY category_id
+HAVING MIN(price) < 10;
 ```
 
 **Output:**
 
-![Output10](output.png)
-
+![alt text](q10.png)
 
 ## RESULT
 Thus, the SQL queries to implement aggregate functions, GROUP BY, and HAVING clause have been executed successfully.
