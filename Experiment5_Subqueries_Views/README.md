@@ -38,124 +38,263 @@ DROP VIEW view_name;
 
 **Question 1**
 --
--- Paste Question 1 here
+Write a SQL query to List departments with names longer than the average length
 
 ```sql
--- Paste your SQL code below for Question 1
+SELECT 
+    department_id AS depar,
+    department_name
+FROM departments
+WHERE LENGTH(department_name) > (
+    SELECT AVG(LENGTH(department_name))
+    FROM departments
+);
 ```
 
 **Output:**
 
-![Output1](output.png)
+![alt text](q1.png)
 
 **Question 2**
 ---
--- Paste Question 2 here
+Write a SQL query to Retrieve the medications with dosages equal to the lowest dosage
 
 ```sql
--- Paste your SQL code below for Question 2
+SELECT 
+    medication_id AS medic,
+    medication_name,
+    dosage
+FROM medications
+WHERE dosage = (
+    SELECT MIN(dosage)
+    FROM medications
+);
 ```
 
 **Output:**
 
-![Output2](output.png)
+![alt text](q2.png)
 
 **Question 3**
 ---
--- Paste Question 3 here
+Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose AGE is LESS than $30
+```
+Sample table: CUSTOMERS
+
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+
+1          Ramesh     32              Ahmedabad     2000
+2          Khilan        25              Delhi                 1500
+3          Kaushik      23              Kota                  2000
+4          Chaitali       25             Mumbai            6500
+5          Hardik        27              Bhopal              8500
+6          Komal         22              Hyderabad       4500
+
+7           Muffy          24              Indore            10000
+```
 
 ```sql
--- Paste your SQL code below for Question 3
+SELECT *
+FROM CUSTOMERS
+WHERE AGE < 30;
 ```
 
 **Output:**
 
-![Output3](output.png)
+![alt text](q3.png)
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- Paste Question 4 hereWrite a SQL query to retrieve all columns from the CUSTOMERS table for customers whose salary is greater than $4500.
+```
+Sample table: CUSTOMERS
+
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+
+1          Ramesh     32              Ahmedabad     2000
+2          Khilan        25              Delhi                 1500
+3          Kaushik      23              Kota                  2000
+4          Chaitali       25             Mumbai            6500
+5          Hardik        27              Bhopal              8500
+6          Komal         22              Hyderabad       4500
+7           Muffy          24              Indore            10000
+```
 
 ```sql
--- Paste your SQL code below for Question 4
+SELECT *
+FROM CUSTOMERS
+WHERE SALARY > 4500;
 ```
 
 **Output:**
 
-![Output4](output.png)
+![alt text](q4.png)
 
 **Question 5**
 ---
--- Paste Question 5 here
+Write a SQL query to Identify customers whose city is different from the city of the customer with the highest ID
+```
+SAMPLE TABLE: customer
+
+name             type
+---------------  ---------------
+id               INTEGER
+name             TEXT
+city             TEXT
+email            TEXT
+phone            INTEGER
+```
 
 ```sql
--- Paste your SQL code below for Question 5
+SELECT *
+FROM customer
+WHERE city <> (
+    SELECT city
+    FROM customer
+    WHERE id = (SELECT MAX(id) FROM customer)
+);
 ```
 
 **Output:**
 
-![Output5](output.png)
+![alt text](q5.png)
 
 **Question 6**
 ---
--- Paste Question 6 here
+Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose Address as Delhi
+```
+Sample table: CUSTOMERS
+
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+
+1          Ramesh     32              Ahmedabad     2000
+2          Khilan        25              Delhi                 1500
+3          Kaushik      23              Kota                  2000
+4          Chaitali       25             Mumbai            6500
+5          Hardik        27              Bhopal              8500
+6          Komal         22              Hyderabad       4500
+7           Muffy          24              Indore            10000
+```
 
 ```sql
--- Paste your SQL code below for Question 6
+SELECT *
+FROM CUSTOMERS
+WHERE ADDRESS = 'Delhi';
 ```
 
 **Output:**
 
-![Output6](output.png)
+![alt text](q6.png)
 
 **Question 7**
 ---
--- Paste Question 7 here
+Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose salary is LESS than $2500.
+```
+Sample table: CUSTOMERS
+
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+
+1          Ramesh     32              Ahmedabad     2000
+2          Khilan        25              Delhi                 1500
+3          Kaushik      23              Kota                  2000
+4          Chaitali       25             Mumbai            6500
+5          Hardik        27              Bhopal              8500
+6          Komal         22              Hyderabad       4500
+7           Muffy          24              Indore            10000
+```
 
 ```sql
--- Paste your SQL code below for Question 7
+SELECT *
+FROM CUSTOMERS
+WHERE SALARY < 2500;
 ```
 
 **Output:**
 
-![Output7](output.png)
+![alt text](q7.png)
 
 **Question 8**
 ---
--- Paste Question 8 here
+From the following tables write a SQL query to find all orders generated by London-based salespeople. Return ord_no, purch_amt, ord_date, customer_id, salesman_id.
 
 ```sql
--- Paste your SQL code below for Question 8
+SELECT 
+    o.ord_no,
+    o.purch_amt,
+    o.ord_date,
+    o.customer_id,
+    o.salesman_id
+FROM orders AS o
+JOIN salesman AS s
+ON o.salesman_id = s.salesman_id
+WHERE s.city = 'London';
 ```
 
 **Output:**
 
-![Output8](output.png)
+![alt text](q8.png)
 
 **Question 9**
 ---
--- Paste Question 9 here
+Write a SQL query to Retrieve the names of customers who have a phone number that is not shared with any other customer.
+```
+SAMPLE TABLE: customer
+
+name             type
+---------------  ---------------
+id               INTEGER
+name             TEXT
+city             TEXT
+email            TEXT
+phone            INTEGER
+```
 
 ```sql
--- Paste your SQL code below for Question 9
+SELECT name
+FROM customer
+WHERE phone IN (
+    SELECT phone
+    FROM customer
+    GROUP BY phone
+    HAVING COUNT(*) = 1
+);
 ```
 
 **Output:**
 
-![Output9](output.png)
+![alt text](q9.png)
 
 **Question 10**
 ---
--- Paste Question 10 here
+Write a SQL query to retrieve all columns from the CUSTOMERS table for customers whose salary is greater than $1500.
+```
+Sample table: CUSTOMERS
+
+ID          NAME        AGE         ADDRESS     SALARY
+----------  ----------  ----------  ----------  ----------
+
+1          Ramesh     32              Ahmedabad     2000
+2          Khilan        25              Delhi                 1500
+3          Kaushik      23              Kota                  2000
+4          Chaitali       25             Mumbai            6500
+5          Hardik        27              Bhopal              8500
+6          Komal         22              Hyderabad       4500
+7           Muffy          24              Indore            10000
+```
 
 ```sql
--- Paste your SQL code below for Question 10
+SELECT *
+FROM CUSTOMERS
+WHERE SALARY > 1500;
 ```
 
 **Output:**
 
-![Output10](output.png)
-
+![alt text](q10.png)
 
 ## RESULT
 Thus, the SQL queries to implement subqueries and views have been executed successfully.
